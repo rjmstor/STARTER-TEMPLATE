@@ -106,7 +106,36 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if(session('status'))
+            Swal.fire({
+                title: 'Congratulations!',
+                text: "{{ session('status') }}",
+                icon: 'Success',
+                timer: 3000
+            })
+        @endif
+        @if($errors->any())
+            @php
+                $message = '';
+                foreach($errors->all() as $error)
+                {
+                    $message .= "<li>{{ $error }}</li>";
+                }
+            @endphp
+            Swal.fire({
+                title: 'Error',
+                text: "{!! $message !!}",
+                icon: 'error',
+            })
+        @endif
+    </script>
+    <script>
+            $('#table-data').DataTable();
+            let baseurl = "<?=url('/')?>";
+            let fullUrl = "<?-url()->full()?>";
+    </script>
 </body>
 
 </html>

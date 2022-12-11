@@ -27,10 +27,10 @@ class CreateUsersSeeder extends Seeder
                 'username' => 'isAdmin',
                 'email' => 'admin@mail.com',
                 'password' => bcrypt('12345'),
-                'roles_id' => 1
+                'roles_id' => 1 
             ]
             ];
-            foreach ($user as $key => $value){
+            foreach ($user as $key => $value) {
                 User::create($value);
             }
     }
