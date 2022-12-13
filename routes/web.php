@@ -40,5 +40,8 @@ Route::post('admin/books', [App\Http\Controllers\AdminController::class, 'print'
 Route::post('admin/books', [App\Http\Controllers\AdminController::class, 'export'])
 ->name('admin.export.book')
 ->middleware('is_admin');
+Route::post('admin/books', [App\Http\Controllers\AdminController::class, 'submit_book'])
+->name('admin.book.submit')
+->middleware('is_admin');
 
 
