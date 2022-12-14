@@ -42,6 +42,9 @@ Route::controller(AdminController::class)->group(function (){
                                                 ->middleware('is_admin');
     Route::patch('admin/books/update', 'update_book')->name('admin.book.update')
                                                 ->middleware('is_admin');
+    Route::get('admin/ajaxadmin/dataBuku/{id}', 'getDataBuku');
+    Route::delete('admin/books/delete/{id}', 'delete_book')->name('admin.book.delete')
+                                                ->middleware('is_admin'); 
  
 });
 
