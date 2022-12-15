@@ -49,6 +49,18 @@ Route::controller(AdminController::class)->group(function (){
                                                 ->middleware('is_admin');
     Route::get('admin/books/export', 'export')->name('admin.book.export')
                                             ->middleware('is_admin');
+    Route::post('admin/books/import', 'import')->name('admin.book.import')
+                                            ->middleware('is_admin');
+    Route::get('admin/trash', 'trash')->name('trash')
+                                    ->middleware('is_admin');
+    Route::delete('admin/books/empty/{id}', 'delete_force')->name('admin.book.delete.force')
+                                    ->middleware('is_admin');
+    // Route::post('admin/books/restore/{id}', 'restore')->name('admin.book.delete.force')
+    //                                 ->middleware('is_admin');
+    // Route::post('admin/restore/all', 'restoreAll')->name('admin.book.restore')
+    //                                 ->middleware('is_admin');
+    // Route::post('admin/delete/all', 'deleteAll')->name('admin.book.deleteAll')
+    //                                 ->middleware('is_admin'); 
  
 });
 
