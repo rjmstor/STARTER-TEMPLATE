@@ -45,6 +45,10 @@ Route::controller(AdminController::class)->group(function (){
     Route::get('admin/ajaxadmin/dataBuku/{id}', 'getDataBuku');
     Route::delete('admin/books/delete/{id}', 'delete_book')->name('admin.book.delete')
                                                 ->middleware('is_admin'); 
+    Route::get('admin/print_books', 'print_books')->name('admin.print.books')
+                                                ->middleware('is_admin');
+    Route::get('admin/books/export', 'export')->name('admin.book.export')
+                                            ->middleware('is_admin');
  
 });
 
