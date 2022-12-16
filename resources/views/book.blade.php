@@ -238,8 +238,8 @@
                                     success: function (response) {
                                         Swal.fire('Terhapus!', response.msg, 'success');
                                         console.log(response);
-                                            // $("#table-row" + id).remove();
-                                            //$('#table-data').load(document.URL +  ' #table-data').ajax.reload();;
+                                            $("#table-row" + id).remove();
+                                            $('#table-data').load(document.URL +  ' #table-data').ajax.reload();;
                                             location.reload();
                                     }
                                 });
