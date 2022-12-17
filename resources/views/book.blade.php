@@ -11,14 +11,14 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#tambahBukuModal">
                 Tambah Data <i class="fa fa-plus"></i> 
             </button>
-            <!-- <a href="{{ route('admin.print.books') }}" target="_blank" class="btn btn-secondary">
+            <a href="{{ route('admin.print.books') }}" target="_blank" class="btn btn-secondary">
                 <i class="fa fa-print"></i> Cetak PDF</a>
             <div class="btn-group" role="group" aria-label="Basic Example">
                 <a href="{{ route('admin.book.export') }}" class="btn btn-info" 
                 target="_blank"><i class="fa fa-file-excel"></i> Export</a>
                 <button type="button" class="btn btn-warning" data-toggle="modal" 
                 data-target="#importDataModal"><i class="fa fa-file-excel"></i> Import</button>
-            </div> -->
+            </div> 
             <hr/>
             <table id="table-data" class="table table-borderer">
                 <thead>
