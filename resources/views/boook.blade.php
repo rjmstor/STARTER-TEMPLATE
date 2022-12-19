@@ -8,17 +8,18 @@
     <div class="card card-default">
         <div class="card-header">{{__('Pengelolaan Buku')}}</div>
         <div class="card-body">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#tambahBukuModal">
+            {{-- <button class="btn btn-primary" data-toggle="modal" data-target="#tambahBukuModal">
                 Tambah Data <i class="fa fa-plus"></i> 
             </button>
-            <a href="{{ route('admin.print.books') }}" target="_blank" class="btn btn-danger">
+            <a href="{{ route('admin.print.books') }}" target="_blank" class="btn btn-secondary">
                 <i class="fa fa-print"></i> Cetak PDF</a>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="{{route('admin.book.export')}}" class="btn btn-info" target="_blank">Export</a>
-                    <button type="button" class="btn btn-warning" data-toggle="modal" 
+            <div class="btn-group" role="group" aria-label="Basic Example">
+                <a href="{{ route('admin.book.export') }}" class="btn btn-info" 
+                target="_blank"><i class="fa fa-file-excel"></i> Export</a>
+                <button type="button" class="btn btn-warning" data-toggle="modal" 
                 data-target="#importDataModal"><i class="fa fa-file-excel"></i> Import</button>
-                </div>
-            <hr/>
+            </div>
+            <hr/> --}}
             <table id="table-data" class="table table-borderer">
                 <thead>
                     <tr class="text-center">
@@ -32,10 +33,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $no=1; @endphp
-                    @foreach ($books as $item => $book)
+                    @forelse ($books as $item => $book)
                         <tr id="table-row{{$book->id}}">
-                            <td>{{$no++}}</td>
+                            <td>{{$item+1}}</td>
                             <td>{{$book->judul}}</td>
                             <td>{{$book->penulis}}</td>
                             <td>{{$book->tahun}}</td>
@@ -47,21 +47,18 @@
                                 [Gambar tidak tersedia]
                                 @endif    
                             </td>
-                            <td></td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <form action="books/delete/{{$book->id}}" method="post">
-                                    @csrf
-                                    @method('delete')
                                     <button type="button" id="btn-edit-buku" class="btn btn-success"
                                     data-toggle="modal" data-target="#editBukuModal" data-id="{{ $book->id }}">Edit</button>
-                                    
-                                    <button type="submit" id="btn-delete-buku" class="btn btn-danger" data-id="{{$book->id}}" value="{{$book->id}}">Hapus</button>   
-                                </form>
+
+                                    <button type="button" id="btn-delete-buku" class="btn btn-danger" data-id="{{$book->id}}" value="{{$book->id}}">Hapus</button>   
                                 </div>    
-                            </td>  
-                        </tr>
-                        @endforeach
+                            </td>    
+                        </tr>                        
+                    @empty
+                        <h4>Data Kosong</h4>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -185,7 +182,6 @@
 </div>
 </div>
 @stop
-
 @section('js')
 <script>
     $(function(){
@@ -216,40 +212,40 @@
                 });
         });
     </script>
-<script>
-    $(function(){
-        $(document).on('click', '#btn-delete-buku', function(){
-            var id = $(this).val();
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-        }
-    });
-                Swal.fire({
-                        title: 'Apa kamu yakin?',
-                        text: "Kamu tidak akan dapat mengembalikan ini!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Ya, hapus!',
-                        cancelButtonText: 'Batal'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: "books/delete/" +id,
-                                type: "DELETE",
-                                success: function (response) {
-                                    Swal.fire('Terhapus!', response.msg, 'success');
-                                    console.log(response);
-                                        $("#table-row" + id).remove();
-                                        //$('#table-data').load(document.URL +  ' #table-data').ajax.reload();;
-                                        //window.location.reload();
-                                }
-                            });
-                        }
-                    })
-          });
+    <script>
+        $(function(){
+            $(document).on('click', '#btn-delete-buku', function(){
+                var id = $(this).val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
         });
-</script>
+                    Swal.fire({
+                            title: 'Apa kamu yakin?',
+                            text: "Kamu tidak akan dapat mengembalikan ini!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Ya, hapus!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $.ajax({
+                                    url: "books/delete/" +id,
+                                    type: "DELETE",
+                                    success: function (response) {
+                                        Swal.fire('Terhapus!', response.msg, 'success');
+                                        console.log(response);
+                                            $("#table-row" + id).remove();
+                                            //$('#table-data').load(document.URL +  ' #table-data').ajax.reload();;
+                                            //window.location.reload();
+                                    }
+                                });
+                            }
+                        })
+              });
+            });
+    </script>
 @stop
