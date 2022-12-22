@@ -130,6 +130,6 @@ class AdminController extends Controller
             'message' => 'Import data berhasil dilakukan',
             'alert-type' =>'success'
         );
-        return redirect()->route(admin.books)->with($notification);
+        return redirect()->back()->with($notification);
     }
 }
