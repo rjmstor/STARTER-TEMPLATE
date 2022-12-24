@@ -6,6 +6,8 @@
   
 @section('content')
     <p>Welcome</p>
+    <p>IS THIS RONALDO<p>
+    <p>SIUUUUUUUUUUUUUUUUUUUUUUUUUUU<p>
 @stop
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
